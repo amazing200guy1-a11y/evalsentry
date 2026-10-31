@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvalSentry Audit Report - Demo Side-by-Side Comparison</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f293d;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #00f2fe;
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --card-hover: #162032;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 40px 20px; line-height: 1.5; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    
+    header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 30px; }
+    .brand h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .brand p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+    .header-meta { text-align: right; }
+    .timestamp { font-size: 13px; color: var(--text-muted); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 30px; }
+    .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .stat-label { font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; }
+    .stat-value { font-size: 32px; font-weight: 800; margin-top: 6px; }
+    .val-pass { color: var(--green); }
+    .val-fail { color: var(--red); }
+    .val-rate { color: #38bdf8; }
+
+    .table-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { background: #0c121e; padding: 14px 18px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    td { padding: 16px 18px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background-color: var(--card-hover); }
+
+    .test-title { font-weight: 700; color: #fff; font-size: 15px; }
+    .test-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+    .fail-box { margin-top: 10px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--red); padding: 10px 14px; border-radius: 4px; font-family: monospace; font-size: 12px; color: #fca5a5; }
+    .cwe-tag { display: inline-block; margin-top: 6px; font-size: 11px; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; color: #e5e7eb; }
+
+    .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 800; font-size: 11px; letter-spacing: 0.5px; }
+    .pill-pass { background: rgba(16, 185, 129, 0.2); color: var(--green); }
+    .pill-fail { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+
+    .cat-pill { font-size: 12px; background: #1e293b; padding: 4px 8px; border-radius: 6px; color: #cbd5e1; white-space: nowrap; }
+    .sev-pill { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+    .sev-critical { background: #450a0a; color: #f87171; }
+    .sev-high { background: #451a03; color: #fb923c; }
+    .sev-medium { background: #3b0764; color: #c084fc; }
+
+    .badge { padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; }
+    .badge-pass { background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); }
+    .badge-fail { background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); }
+    .badge-warn { background: rgba(245, 158, 11, 0.2); color: var(--yellow); border: 1px solid var(--yellow); }
+
+    footer { text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <h1>EVALSENTRY</h1>
+        <p>Deterministic Edge-Case Linter & Stress Tester for AI-Generated Code</p>
+      </div>
+      <div class="header-meta">
+        <div><span class="badge badge-fail">CRITICAL DEFECTS FOUND</span></div>
+        <div class="timestamp" style="margin-top: 8px;">Target: <strong>Demo Side-by-Side Comparison</strong></div>
+        <div class="timestamp">Sat, 31 Oct 2026 00:15:01 GMT</div>
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Pass Rate</div>
+        <div class="stat-value val-rate">50%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Suites</div>
+        <div class="stat-value">4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Passed</div>
+        <div class="stat-value val-pass">2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Vulnerabilities Detected</div>
+        <div class="stat-value val-fail">2</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 90px;">Verdict</th>
+            <th>Edge-Case Specification & Defect Diagnostics</th>
+            <th>Category</th>
+            <th>Severity</th>
+            <th style="width: 80px;">Latency</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr class="row-fail">
+          <td class="status-col"><span class="pill pill-fail">FAIL</span></td>
+          <td>
+            <div class="test-title">Snowflake Dedupe (ChatGPT Unpatched)</div>
+            <div class="test-desc">Evaluates whether JSON parsing preserves full 64-bit precision on IDs larger than 2^53 - 1. Standard JSON.parse converts IDs to floating point doubles, causing distinct adjacent records to collide and get deleted.</div>
+            <div class="fail-box"><strong>Failure:</strong> FAIL: ids must keep full precision and dedupe exactly. Expected 2 distinct items, got 1. (IEEE-754 double precision collision detected)<br><span class="cwe-tag">CWE-681: Incorrect Conversion between Numeric Types</span></div>
+          </td>
+          <td><span class="cat-pill">💳 Financial Data Integrity</span></td>
+          <td><span class="sev-pill sev-critical">CRITICAL</span></td>
+          <td class="time-col">218ms</td>
+        </tr>
+      
+
+        <tr class="row-pass">
+          <td class="status-col"><span class="pill pill-pass">PASS</span></td>
+          <td>
+            <div class="test-title">Snowflake Dedupe (EvalSentry Hardened)</div>
+            <div class="test-desc">Evaluates whether JSON parsing preserves full 64-bit precision on IDs larger than 2^53 - 1. Standard JSON.parse converts IDs to floating point doubles, causing distinct adjacent records to collide and get deleted.</div>
+            
+          </td>
+          <td><span class="cat-pill">💳 Financial Data Integrity</span></td>
+          <td><span class="sev-pill sev-critical">CRITICAL</span></td>
+          <td class="time-col">224ms</td>
+        </tr>
+      
+
+        <tr class="row-fail">
+          <td class="status-col"><span class="pill pill-fail">FAIL</span></td>
+          <td>
+            <div class="test-title">OWASP Redirect (AI Assistant Default)</div>
+            <div class="test-desc">Evaluates whether a redirect URL validator properly defends against protocol-relative bypasses (//evil.com), backslash escapes (/\evil.com), tab insertions (/\t/evil.com), and data/javascript URIs.</div>
+            <div class="fail-box"><strong>Failure:</strong> FAIL: should block (backslash) &#039;/\evil.com&#039;<br><span class="cwe-tag">CWE-601: URL Redirection to Untrusted Site ('Open Redirect')</span></div>
+          </td>
+          <td><span class="cat-pill">🛡️ Web Security & OWASP Defenses</span></td>
+          <td><span class="sev-pill sev-high">HIGH</span></td>
+          <td class="time-col">343ms</td>
+        </tr>
+      
+
+        <tr class="row-pass">
+          <td class="status-col"><span class="pill pill-pass">PASS</span></td>
+          <td>
+            <div class="test-title">OWASP Redirect (Strict RFC Hardened)</div>
+            <div class="test-desc">Evaluates whether a redirect URL validator properly defends against protocol-relative bypasses (//evil.com), backslash escapes (/\evil.com), tab insertions (/\t/evil.com), and data/javascript URIs.</div>
+            
+          </td>
+          <td><span class="cat-pill">🛡️ Web Security & OWASP Defenses</span></td>
+          <td><span class="sev-pill sev-high">HIGH</span></td>
+          <td class="time-col">199ms</td>
+        </tr>
+      
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      Generated with <strong>EvalSentry CLI v1.0.0</strong> — Zero-LLM-Judge Deterministic Software Engineering Linter.
+    </footer>
+  </div>
+</body>
+</html>

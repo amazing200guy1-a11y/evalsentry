@@ -1,0 +1,26 @@
+{
+  "name": "evalsentry",
+  "version": "1.0.0",
+  "description": "Deterministic Edge-Case Linter & Stress-Testing Sandbox for AI-Generated Code",
+  "main": "lib/index.js",
+  "bin": {
+    "evalsentry": "./bin/evalsentry.js"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "evaluation",
+    "linter",
+    "code-audit",
+    "security",
+    "edge-cases",
+    "deterministic-testing",
+    "copilot",
+    "chatgpt"
+  ],
+  "author": "Usman Bamidele",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
